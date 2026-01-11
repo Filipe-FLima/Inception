@@ -1,5 +1,5 @@
-# Base image: Debian Buster
-FROM debian:buster
+# Base image: Debian bookworm
+FROM debian:bookworm
 
 # Install Nginx (web server) and OpenSSL (TLS certificate toolkit)
 RUN apt-get update && \
