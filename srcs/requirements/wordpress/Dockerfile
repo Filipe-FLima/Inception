@@ -18,10 +18,17 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp
 
-# Copy the .conf in the html directory
-COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/
+# Copy the .conf into php-fpm pool directory
+COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
 # Copy the script, give the right to execute it in local on our computer
 COPY ./tools/wp-setup.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/wp-setup.sh
 ENTRYPOINT ["/usr/local/bin/wp-setup.sh"]
+
+WORKDIR /var/www/html
+
+EXPOSE 9000
+
+# test it
+CMD ["php-fpm8.2", "-F"]
