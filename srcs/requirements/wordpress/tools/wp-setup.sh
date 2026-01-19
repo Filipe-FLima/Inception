@@ -26,7 +26,7 @@ if [ ! -f wp-config.php ]; then
 
     DB_ON=false
 
-    for i in $(deq 1 30); do
+    for i in $(seq 1 30); do
         if mysqladmin ping -h mariadb --silent; then
             DB_ON=true
             break
@@ -46,3 +46,33 @@ if [ ! -f wp-config.php ]; then
         --dbpass=${MYSQL_PASSWORD} \
         --dbhost=${MYSQL_HOSTNAME} \
         --allow-root
+
+    echo "Installing WP"
+    wp core install \
+        --url=${DOMAIN_NAME} \
+        --title="42INCEPTION" \
+        --admin-user=${WP_ADMIN} \
+        --admin_email=${WP_ADMIN_EMAIL} \
+        --admin_password=${WP_ADMIN_PASSWORD} \
+        --allow-root
+    
+    #install theme
+
+    echo "Creating user account"
+    wp user create / 
+        ${WP_USER} ${WP_USER_EMAIL} \
+        --user_pass=${WP_USER_PW} \
+        --role=author \
+        --allow-root
+    
+    update_wp_urls
+
+    echo "WP setup completed successfully"
+
+else
+    echo "WP is already set up"
+    update_wp_urls
+fi
+
+echo "Starting PHP-FPM..."
+exec php-fpm8.2 -F
