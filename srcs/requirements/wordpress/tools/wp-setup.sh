@@ -31,19 +31,20 @@ if [ ! -f wp-config.php ]; then
             DB_ON=true
             break
         fi
-        encho "Waiting for MariaDB... ($i/30)"
+        echo "Waiting for MariaDB... ($i/30)"
         sleep 2
     done
 
     if [ "$DB_ON" = false ]; then
         echo " Error: MariaDB not reachable"
         exit 1
+    fi
      
     echo "Creating wp-config.php"
     wp config create \
         --dbname=${MYSQL_DATABASE} \
         --dbuser=${MYSQL_USER} \
-        --dbpass=${MYSQL_PASSWORD} \
+        --dbpass=${MYSQL_PW} \
         --dbhost=${MYSQL_HOSTNAME} \
         --allow-root
 
@@ -51,15 +52,15 @@ if [ ! -f wp-config.php ]; then
     wp core install \
         --url=${DOMAIN_NAME} \
         --title="42INCEPTION" \
-        --admin-user=${WP_ADMIN} \
+        --admin_user=${WP_ADMIN} \
         --admin_email=${WP_ADMIN_EMAIL} \
-        --admin_password=${WP_ADMIN_PASSWORD} \
+        --admin_password=${WP_ADMIN_PW} \
         --allow-root
     
     #install theme
 
     echo "Creating user account"
-    wp user create / 
+    wp user create \ 
         ${WP_USER} ${WP_USER_EMAIL} \
         --user_pass=${WP_USER_PW} \
         --role=author \
@@ -70,9 +71,9 @@ if [ ! -f wp-config.php ]; then
     echo "WP setup completed successfully"
 
 else
-    echo "WP is already set up"
+    echo "WP is already configured"
     update_wp_urls
 fi
 
 echo "Starting PHP-FPM..."
-exec php-fpm8.2 -F
+exec "$@"
