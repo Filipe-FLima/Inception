@@ -17,7 +17,7 @@ env_check:
 	fi
 
 data_base:
-	@mkdir -p $(HOME)/data/mariaDB
+	@mkdir -p $(HOME)/data/mariadb
 	@mkdir -p $(HOME)/data/wordpress
 	@echo "$(GREEN)Data base folder created\n$(RESET)"
 

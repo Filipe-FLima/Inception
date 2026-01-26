@@ -1,10 +1,10 @@
 services:
   mariadb:
-    container_name: mariaDB
-    build: ./requirements/mariaDB
-    image: mariaDB-inception
+    container_name: mariadb
+    build: ./requirements/mariadb
+    image: mariadb-inception
     volumes:
-      - mariaDB:/var/lib/mysql
+      - mariadb:/var/lib/mysql
     env_file:
       - .env
     networks:
@@ -15,7 +15,7 @@ services:
     build: ./requirements/wordpress
     image: wordpress-inception
     depends_on:
-      - mariaDB
+      - mariadb
     volumes:
       - wordpress:/var/www/html
     env_file:
@@ -47,11 +47,11 @@ networks:
     driver: bridge
 
 volumes:
-  mariaDB:
+  mariadb:
     driver: local
     driver_opts:
       type: none
-      device: ${HOME}/data/mariaDB
+      device: ${HOME}/data/mariadb
       o: bind
   wordpress:
     driver: local
