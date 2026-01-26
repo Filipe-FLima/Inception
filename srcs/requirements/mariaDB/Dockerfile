@@ -14,4 +14,4 @@ ENTRYPOINT ["/usr/local/bin/mdb-setup.sh"]
 
 EXPOSE 3306
 
-CMD ["mysqld", "--bind-address=0.0.0.0"]
+CMD ["--bind-address=0.0.0.0", "--port=3306"]
