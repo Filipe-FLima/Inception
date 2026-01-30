@@ -60,7 +60,7 @@ if [ ! -f wp-config.php ]; then
     #install theme
 
     echo "Creating user account"
-    wp user create \ 
+    wp user create \
         ${WP_USER} ${WP_USER_EMAIL} \
         --user_pass=${WP_USER_PW} \
         --role=author \

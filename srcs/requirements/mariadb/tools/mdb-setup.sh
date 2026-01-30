@@ -30,7 +30,7 @@ if [ ! -d "${DATA_DIR}/${MYSQL_DATABASE}" ]; then
         i=$((i+1))
         if [ "$i" -ge "$MAX_ATTEMPTS" ]; then
             kill "$TEMP_PID" 2>/dev/null || true
-            echo "Error: MarriaDB initialization timeout"
+            echo "Error: MariaDB initialization timeout"
             exit 1
         fi
         echo "Waiting for mariaDB initialization... (${i}/${MAX_ATTEMPTS})"

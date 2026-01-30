@@ -6,12 +6,12 @@ YELLOW = \033[0;33m
 RESET = \033[0m
 
 COMPOSE = ./srcs/docker-compose.yml
-ENV = .env
+ENV = ./srcs/.env
 
 all: env_check data_base build
 
 env_check:
-	@if [ ! -f$(ENV) ]; then \
+	@if [ ! -f $(ENV) ]; then \
 		echo "$(RED)Error: could not find environment variables$(RESET)"; \
 		exit 1; \
 	fi
@@ -29,7 +29,7 @@ down:
 
 clean: down
 	@docker system prune -af
-	@docker colume prune -f
+	@docker volume prune -f
 	@echo "$(GREEN) Docker environment fully cleaned.$(RESET)"
 
 fclean: clean
@@ -37,9 +37,10 @@ fclean: clean
 	@docker volume rm $$(docker volume ls -q) 2>/dev/null || true
 	@docker rmi -f $$(docker images -q) 2>/dev/null || true
 	@sudo rm -rf $(HOME)/data
-	@echo "%(GREEN)Full cleanup completed: Docker resources and persistent data were permanently removed.$(RESET)" "
+	@echo "$(GREEN)Full cleanup completed: Docker resources and persistent data were permanently removed.$(RESET)" "
 
-re: down up
+# CHECK IT 
+re: down build 
 	@echo "$(GREEN)Containers rebuilt and environment restarted successfully.$(RESET)"
 
 

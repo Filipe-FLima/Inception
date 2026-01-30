@@ -4,7 +4,7 @@ RUN apt-get update -y && \
     apt-get install mariadb-server -y && \
 	rm -rf /var/lib/apt/lists/*
 
-COPY    ./conf/mariadb.cnf /etc/mysql/mariadb.conf.d
+COPY    ./conf/mariadb.cnf /etc/mysql/mariadb.conf.d/mariadb.cnf
 RUN     chmod 644 /etc/mysql/mariadb.conf.d/mariadb.cnf
 
 COPY ./tools/mdb-setup.sh /usr/local/bin/

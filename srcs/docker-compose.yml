@@ -31,7 +31,7 @@ services:
     build: ./requirements/nginx
     image: nginx-inception
     depends_on:
-    - wordpress
+      - wordpress
     volumes:
       - wordpress:/var/www/html
     env_file:
