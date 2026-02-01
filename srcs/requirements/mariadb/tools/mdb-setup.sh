@@ -2,6 +2,8 @@
 
 set -eu
 
+MYSQL_PW="$(cat /run/secrets/db_password)"
+MYSQL_ROOT_PASSWORD="$(cat /run/secrets/db_root_password)"
 SOCKET_DIR=/run/mysqld
 SOCKET="${SOCKET_DIR}/mysqld.sock"
 DATA_DIR="/var/lib/mysql"

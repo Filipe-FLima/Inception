@@ -1,5 +1,8 @@
 #!/bin/bash
 
+MYSQL_PW="$(cat /run/secrets/db_password)"
+WP_ADMIN_PW="$(cat /run/secrets/wp_admin_password)"
+WP_USER_PW="$(cat /run/secrets/wp_user_password)"
 # Set ownership and permissions for WordPress files so that PHP-FPM (www-data)
 # can read and write content securely (uploads, plugins, cache, etc.)
 chown -R www-data:www-data /var/www/html
