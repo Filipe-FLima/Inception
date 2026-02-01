@@ -61,7 +61,7 @@ if [ ! -f wp-config.php ]; then
 
     echo "Creating user account"
     wp user create \
-        ${WP_USER} ${WP_USER_EMAIL} \
+        "${WP_USER}" "${WP_USER_EMAIL}" \
         --user_pass=${WP_USER_PW} \
         --role=author \
         --allow-root

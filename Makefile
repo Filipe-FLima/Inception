@@ -17,8 +17,8 @@ env_check:
 	fi
 
 data_base:
-	@mkdir -p $(HOME)/data/mariadb
-	@mkdir -p $(HOME)/data/wordpress
+	@mkdir -p $(HOME)/flima/data/mariadb
+	@mkdir -p $(HOME)/flima/data/wordpress
 	@echo "$(GREEN)Data base folder created\n$(RESET)"
 
 build:
@@ -36,8 +36,8 @@ fclean: clean
 	@docker compose -f $(COMPOSE) down --volumes
 	@docker volume rm $$(docker volume ls -q) 2>/dev/null || true
 	@docker rmi -f $$(docker images -q) 2>/dev/null || true
-	@sudo rm -rf $(HOME)/data
-	@echo "$(GREEN)Full cleanup completed: Docker resources and persistent data were permanently removed.$(RESET)" "
+	@sudo rm -rf $(HOME)/flima/
+	@echo "$(GREEN)Full cleanup completed: Docker resources and persistent data were permanently removed.$(RESET)"
 
 # CHECK IT 
 re: down build 
