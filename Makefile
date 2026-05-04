@@ -7,7 +7,8 @@ RESET = \033[0m
 
 COMPOSE = ./srcs/docker-compose.yml
 ENV = ./srcs/.env
-
+WP_DATA_DIR = $(HOME)/flima/data/wordpress
+MDB_DATA_DIR = $(HOME)/flima/data/mariadb
 all: env_check data_base build
 
 env_check:
@@ -17,8 +18,8 @@ env_check:
 	fi
 
 data_base:
-	@mkdir -p $(HOME)/flima/data/mariadb
-	@mkdir -p $(HOME)/flima/data/wordpress
+	@mkdir -p $(MDB_DATA_DIR)
+	@mkdir -p $(WP_DATA_DIR)
 	@echo "$(GREEN)Data base folder created\n$(RESET)"
 
 build:
@@ -36,7 +37,8 @@ fclean: clean
 	@docker compose -f $(COMPOSE) down --volumes
 	@docker volume rm $$(docker volume ls -q) 2>/dev/null || true
 	@docker rmi -f $$(docker images -q) 2>/dev/null || true
-	@sudo rm -rf $(HOME)/flima/
+	@sudo rm -rf $(WP_DATA_DIR)
+	@sudo rm -rf $(MDB_DATA_DIR)
 	@echo "$(GREEN)Full cleanup completed: Docker resources and persistent data were permanently removed.$(RESET)"
 
 # CHECK IT 
