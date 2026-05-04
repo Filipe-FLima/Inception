@@ -85,7 +85,7 @@ make --version
 
 ```bash
 git clone https://github.com/Filipe-FLima/Inception.git
-cd inception
+cd Inception
 ```
 
 ### 3.2 Configure `.env`

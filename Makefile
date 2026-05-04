@@ -42,7 +42,7 @@ fclean: clean
 	@echo "$(GREEN)Full cleanup completed: Docker resources and persistent data were permanently removed.$(RESET)"
 
 # CHECK IT 
-re: down build 
+re: fclean build 
 	@echo "$(GREEN)Containers rebuilt and environment restarted successfully.$(RESET)"
 
 

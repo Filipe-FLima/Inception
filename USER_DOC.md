@@ -133,7 +133,7 @@ cat secrets/wp_admin_password.txt
    ```
 2. Rebuild the stack for the change to take effect:
    ```bash
-   make re
+   make fclean && make
    ```
 
 > ⚠️ Changing database passwords after the first run requires a full reset (`make fclean` + `make`), as MariaDB stores the hashed credentials in its data volume.
