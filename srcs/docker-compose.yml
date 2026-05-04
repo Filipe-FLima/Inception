@@ -7,6 +7,7 @@ services:
       - mariadb:/var/lib/mysql
     env_file:
       - .env
+    restart: always
     networks:
       - inception
     secrets:
@@ -51,13 +52,13 @@ services:
 
 secrets:
   db_password:
-    file: ./secrets/mysql_password.txt
+    file: ../secrets/mysql_password.txt
   db_root_password:
-    file: ./secrets/mysql_root_password.txt
+    file: ../secrets/mysql_root_password.txt
   wp_user_password:
-    file: ./secrets/wp_user_password.txt
+    file: ../secrets/wp_user_password.txt
   wp_admin_password:
-    file: ./secrets/wp_admin_password.txt
+    file: ../secrets/wp_admin_password.txt
 
 networks:
   inception:
