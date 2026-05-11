@@ -23,10 +23,10 @@ data_base:
 	@echo "$(GREEN)Data base folder created\n$(RESET)"
 
 build:
-	@docker compose -f $(COMPOSE) up --build -d
+	@docker compose -p $(NAME) -f $(COMPOSE) up --build -d
 
 down:
-	@docker compose -f $(COMPOSE) down
+	@docker compose -p $(NAME) -f $(COMPOSE) down
 
 clean: down
 	@docker system prune -af
@@ -34,7 +34,7 @@ clean: down
 	@echo "$(GREEN) Docker environment fully cleaned.$(RESET)"
 
 fclean: clean
-	@docker compose -f $(COMPOSE) down --volumes
+	@docker compose -p $(NAME) -f $(COMPOSE) down --volumes
 	@docker volume rm $$(docker volume ls -q) 2>/dev/null || true
 	@docker rmi -f $$(docker images -q) 2>/dev/null || true
 	@sudo rm -rf $(WP_DATA_DIR)
@@ -42,7 +42,7 @@ fclean: clean
 	@echo "$(GREEN)Full cleanup completed: Docker resources and persistent data were permanently removed.$(RESET)"
 
 # CHECK IT 
-re: fclean build 
+re: fclean all
 	@echo "$(GREEN)Containers rebuilt and environment restarted successfully.$(RESET)"
 
 
